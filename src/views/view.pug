@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    div.header
+        div.header_box
+            h1 Professor's Ears are Donkey Ears
+        div.header_box
+            a(href="/user-profile") 
+                i.fas.fa-user
+    div 
+        h1 Title: #{message.title}
+        p=message.message

@@ -1,0 +1,17 @@
+.message-title {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.messages {
+  width: 500px;
+}
+.message {
+  margin-bottom: 20px;
+  background-color: white;
+  padding: 20px;
+
+  font-weight: bold;
+  border: 2px solid forestgreen;
+}

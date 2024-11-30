@@ -1,0 +1,12 @@
+extends layout
+
+block link
+    link(rel="stylesheet" href="/css/login.css")
+block content
+    h1.page-title Professor's Ears are Donkey Ears
+    div.content-box
+        h2.form-title Sign In
+        form(action="/login" method="POST").login-form
+            input(placeholder="E-mail:" type="text" name="email")
+            input(placeholder="Password:" type="password" name="password")
+            button Sign In
