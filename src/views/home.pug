@@ -13,12 +13,31 @@ block content
             a(href="/user-profile") 
                 i.fas.fa-user
     div
-        h1.message-title Messages (#{messages.length})
+        h1.message-title #{messages.length} #{messages.length <= 1 ? "Message" : "Messages"}
         ul.messages
             each message in messages
                 li.message
-                    a(href=`/message/${message.id}`)=message.title 
+                    a(href=`/message/${message.id}`)
+                        div 
+                            span=message.title
             else 
                 li No message.
+    nav.nav
+        ul.nav-bar
+            li.nav-bar_icon
+                a(href="/menu")
+                    i.fas.fa-bars
+            li.nav-bar_icon
+                a(href="/message/write")
+                    i.fas.fa-envelope
+            li.nav-bar_icon
+                a(href="/")
+                    i.fas.fa-home
+            li.nav-bar_icon
+                a(href="/message/edit")
+                    i.fas.fa-edit
+            li.nav-bar_icon
+                a(href="/search")
+                    i.fas.fa-search
 
     

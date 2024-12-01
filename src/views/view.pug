@@ -1,5 +1,8 @@
 extends layout
 
+block link
+    link(rel="stylesheet" href="/css/view.css")
+
 block content
     div.header
         div.header_box
@@ -7,6 +10,27 @@ block content
         div.header_box
             a(href="/user-profile") 
                 i.fas.fa-user
-    div 
-        h1 Title: #{message.title}
-        p=message.message
+    div.msg_container
+        div.msg_where 
+            span From: #{message.stu_id}
+            span To: #{message.pro_id}
+        h1.msg_title Title: #{message.title}
+        p.msg_content=message.message
+        small Created: #{message.date.toISOString().slice(0, 10)}
+    nav.nav
+        ul.nav-bar
+            li.nav-bar_icon
+                a(href="/menu")
+                    i.fas.fa-bars
+            li.nav-bar_icon
+                a(href="/message/write")
+                    i.fas.fa-envelope
+            li.nav-bar_icon
+                a(href="/")
+                    i.fas.fa-home
+            li.nav-bar_icon
+                a(href="/message/edit")
+                    i.fas.fa-edit
+            li.nav-bar_icon
+                a(href="/search")
+                    i.fas.fa-search

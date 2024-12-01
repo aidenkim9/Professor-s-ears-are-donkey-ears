@@ -13,7 +13,6 @@ export const postWrite = async (req, res) => {
       stu_id,
       pro_id,
       title,
-      date: Date.now(),
       message,
     });
     return res.redirect("/");
@@ -23,9 +22,10 @@ export const postWrite = async (req, res) => {
   }
 };
 
-export const view = (req, res) => {
+export const view = async (req, res) => {
   const { id } = req.params;
-  return res.render("view", { id });
+  const message = await Message.findById(id);
+  return res.render("view", { message });
 };
 export const edit = (req, res) => res.render("edit");
 

@@ -5,8 +5,9 @@ block link
 block content
     h1.page-title Professor's Ears are Donkey Ears
     div.content-box
-        form(action="/login" method="POST").login-form
+        form(action="/join" method="POST").login-form
             input(placeholder="E-mail:" type="text" name="email")
+            input(placeholder="User-Id: " type="number" name="user_id")
             input(placeholder="Password:" type="password" name="password")
-            button LOG IN
-            a.alt_btn(href="/join") JOIN &rarr;
+            button Join
+            a.alt_btn(href="/login") LOGIN &rarr;

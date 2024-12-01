@@ -1,0 +1,21 @@
+.msg_title {
+  font-size: 30px;
+  font-weight: 600;
+}
+.msg_where {
+  display: flex;
+  flex-direction: column;
+}
+.msg_where span {
+  margin-bottom: 5px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.msg_content {
+  border: 2px solid forestgreen;
+  padding: 20px;
+  width: 600px;
+  height: 300px;
+  margin: 10px 0px;
+}

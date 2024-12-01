@@ -48,3 +48,8 @@ body {
 .login-form button:hover {
   background-color: darkgreen;
 }
+.alt_btn {
+  margin-top: 20px;
+  color: white;
+  font-weight: bold;
+}
