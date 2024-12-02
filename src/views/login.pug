@@ -5,6 +5,8 @@ block link
 block content
     h1.page-title Professor's Ears are Donkey Ears
     div.content-box
+        if errorMessage 
+            span.error_msg=errorMessage
         form(action="/login" method="POST").login-form
             input(placeholder="E-mail:" type="text" name="email")
             input(placeholder="Password:" type="password" name="password")

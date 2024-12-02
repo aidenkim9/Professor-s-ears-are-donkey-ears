@@ -13,6 +13,12 @@ body {
   margin-bottom: 50px;
   text-align: center;
 }
+.error_msg {
+  color: white;
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 20px;
+}
 .form-title {
   color: white;
   font-size: 32px;

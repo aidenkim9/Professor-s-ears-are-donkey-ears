@@ -1,8 +1,7 @@
 import Message from "../models/Message";
 
 export const home = async (req, res) => {
-  const messages = await Message.find({});
-  return res.render("home", { pageTitle: "Home", messages });
+  return res.render("home", { pageTitle: "Home" });
 };
 export const getWrite = (req, res) =>
   res.render("message", { pageTitle: "Message" });
@@ -25,7 +24,7 @@ export const postWrite = async (req, res) => {
 export const view = async (req, res) => {
   const { id } = req.params;
   const message = await Message.findById(id);
-  return res.render("view", { message });
+  return res.render("view", { message, pageTitle: message.title });
 };
 export const edit = (req, res) => res.render("edit");
 
