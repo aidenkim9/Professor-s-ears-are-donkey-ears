@@ -22,7 +22,9 @@ block content
             if messages
                 each message in messages
                     li.message
-                        a(href=`message/${message._id}`)=message.title
+                        span
+                            a(href=`message/${message._id}`)=message.title
+                        span #{message.date - new Date()}
                 else 
                     li You are student!
              

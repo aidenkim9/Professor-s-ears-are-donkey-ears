@@ -1,12 +1,14 @@
 import Message from "../models/Message";
 
 export const home = async (req, res) => {
-  return res.render("home", { pageTitle: "Home" });
+  const messages = await Message.find();
+  return res.render("home", { pageTitle: "Home", messages });
 };
 export const getWrite = (req, res) =>
   res.render("message", { pageTitle: "Message" });
 export const postWrite = async (req, res) => {
   const { stu_id, pro_id, title, message } = req.body;
+  console.log("Received data: ", stu_id, pro_id, title, message);
   try {
     await Message.create({
       stu_id,

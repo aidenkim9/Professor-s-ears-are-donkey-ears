@@ -6,7 +6,7 @@ const messageSchema = new mongoose.Schema({
   stu_id: { type: Number, required: true, trim: true },
   pro_id: { type: Number, required: true, trim: true },
   title: { type: String, required: true, trim: true },
-  date: { type: Date, required: true, trim: true, default: Date.now },
+  date: { type: Date, trim: true, default: Date.now },
   message: { type: String, required: true, trim: true },
 });
 
