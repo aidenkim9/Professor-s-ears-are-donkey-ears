@@ -46,6 +46,12 @@ body {
   font-weight: bold;
 }
 
+.loggedIn_menu {
+  display: flex;
+  align-items: center;
+  column-gap: 30px;
+}
+
 .main {
   width: 100%;
   display: flex;

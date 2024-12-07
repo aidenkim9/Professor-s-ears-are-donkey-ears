@@ -6,10 +6,15 @@ block content
     div.header
         div.header_box
             h1.header_title Professor's Ears are Donkey Ears
-        if loggedIn
-            div.header_box
-                a(href="/user-profile")
-                    i.fas.fa-user
+
+        if loggedInUser
+            div.loggedIn_menu
+                span.header_menu
+                    a(href="/logout") Log out
+                div.header_box
+                    a(href="/user-profile")
+                        i.fas.fa-user
+
         else
             div
                 span.header_menu
@@ -17,17 +22,16 @@ block content
                 span.header_menu
                     a(href="/join") Join
     div
-        h1.message-title See all messages to you!
+        h1.message-title See all messages
         ul.messages
             if messages
                 each message in messages
                     li.message
                         span
                             a(href=`message/${message._id}`)=message.title
-                        span #{message.date - new Date()}
-                else 
-                    li You are student!
-             
+                        span Open-day: #{message.openDate.slice(0,10)}
+                else
+                    li There is no message
     nav.nav
         ul.nav-bar
             li.nav-bar_icon

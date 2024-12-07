@@ -1,10 +1,8 @@
 import mongoose from "mongoose";
 
-if (process.env.NODE_ENV !== "test") {
-  mongoose.connect("mongodb://127.0.0.1:27017/donkeyears");
-}
+mongoose.connect("mongodb://127.0.0.1:27017/donkeyears");
 
-//테스트 진행할 때만, 조건문 사용
+//테스트 진행할 때만, 조건문 사용 -> if (process.env.NODE_ENV !== "test") {}
 
 const db = mongoose.connection;
 

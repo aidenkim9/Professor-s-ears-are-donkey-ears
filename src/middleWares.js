@@ -4,6 +4,5 @@ export const middleWares = (req, res, next) => {
   }
   res.locals.loggedInUser = req.session.user;
   res.locals.messages = req.session.messages;
-  console.log(req.session);
   next();
 };

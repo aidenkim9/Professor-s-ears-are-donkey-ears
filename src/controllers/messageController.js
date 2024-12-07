@@ -1,19 +1,20 @@
 import Message from "../models/Message";
 
 export const home = async (req, res) => {
-  const messages = await Message.find();
+  const messages = req.session.messages;
+  console.log(messages);
   return res.render("home", { pageTitle: "Home", messages });
 };
 export const getWrite = (req, res) =>
   res.render("message", { pageTitle: "Message" });
 export const postWrite = async (req, res) => {
   const { stu_id, pro_id, title, message } = req.body;
-  console.log("Received data: ", stu_id, pro_id, title, message);
   try {
     await Message.create({
       stu_id,
       pro_id,
       title,
+      openDate: Date.now() + 2592000000,
       message,
     });
     return res.redirect("/");
@@ -26,6 +27,10 @@ export const postWrite = async (req, res) => {
 export const view = async (req, res) => {
   const { id } = req.params;
   const message = await Message.findById(id);
+  if (Number(message.openDate) > Date.now()) {
+    console.log("Check open date");
+    return res.redirect("/");
+  }
   return res.render("view", { message, pageTitle: message.title });
 };
 export const edit = (req, res) => res.render("edit");

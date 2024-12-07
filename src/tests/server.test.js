@@ -32,12 +32,15 @@ describe("End-to-End Tests", () => {
     expect(loginRes.statusCode).toBe(302);
 
     // 메시지 작성 요청
-    const messageRes = await request(app).post("/message/write").send({
-      stu_id: 123,
-      pro_id: 456,
-      title: "New Message",
-      message: "Hello World",
-    });
+    const messageRes = await request(app)
+      .post("/message/write")
+      .send({
+        stu_id: 123,
+        pro_id: 456,
+        title: "New Message",
+        openDate: Date.now() + 2592000000,
+        message: "Hello World",
+      });
 
     console.log("Message Response:", messageRes.statusCode, messageRes.body);
     expect(messageRes.statusCode).toBe(302);

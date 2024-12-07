@@ -6,6 +6,7 @@ import {
   search,
   getJoin,
   postJoin,
+  logout,
 } from "../controllers/userController";
 import { home } from "../controllers/messageController";
 
@@ -16,6 +17,7 @@ globalRouter.get("/login", getLogin);
 globalRouter.post("/login", postLogin);
 globalRouter.get("/join", getJoin);
 globalRouter.post("/join", postJoin);
+globalRouter.get("/logout", logout);
 globalRouter.get("/search", search);
 globalRouter.get("/menu", menu);
 

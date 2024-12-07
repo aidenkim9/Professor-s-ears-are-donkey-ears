@@ -62,5 +62,9 @@ export const postJoin = async (req, res) => {
     return res.render("join", { pageTitle: "Join" });
   }
 };
+export const logout = (req, res) => {
+  req.session.destroy();
+  return res.redirect("/");
+};
 export const search = (req, res) => res.render("search");
 export const menu = (req, res) => res.render("menu");
