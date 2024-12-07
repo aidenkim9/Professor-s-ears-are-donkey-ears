@@ -1,8 +1,7 @@
 import Message from "../models/Message";
 
 export const home = async (req, res) => {
-  const messages = req.session.messages;
-  console.log(messages);
+  const messages = await Message.find({});
   return res.render("home", { pageTitle: "Home", messages });
 };
 export const getWrite = (req, res) =>

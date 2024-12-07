@@ -29,7 +29,7 @@ block content
                     li.message
                         span
                             a(href=`message/${message._id}`)=message.title
-                        span Open-day: #{message.openDate.slice(0,10)}
+                        span Open-day: #{message.openDate.toISOString().slice(0, 10)}
                 else
                     li There is no message
     nav.nav

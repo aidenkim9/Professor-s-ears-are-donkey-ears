@@ -1,59 +1,71 @@
 import request from "supertest";
-import mongoose from "mongoose";
 import User from "../models/User";
 import Message from "../models/Message";
 import app from "../server";
 
 describe("End-to-End Tests", () => {
-  it("should allow a user to sign up, log in, and view messages", async () => {
+  beforeEach(async () => {
+    await User.deleteMany({});
+    await Message.deleteMany({});
+  });
+
+  it("should allow a user to sign up, log in, write a message, and view it", async () => {
     // 회원가입 요청
-    const signupRes = await request(app).post("/join").send({
+    await request(app).post("/join").send({
       email: "test@example.com",
       user_id: 112233,
       password: "123456",
-      password2: "123456", // 비밀번호 확인 필드
+      password2: "123456",
     });
 
-    console.log("Signup Response:", signupRes.statusCode, signupRes.body); // 디버깅 로그 추가
-    expect(signupRes.statusCode).toBe(302); // 성공 시 리다이렉션 확인
-
-    // 데이터베이스에서 사용자 확인
-    const user = await User.findOne({ email: "test@example.com" });
-    console.log("User in DB:", user); // 디버깅 로그 추가
-    expect(user).toBeDefined();
+    // 비밀번호 불일치
+    await request(app)
+      .post("/join")
+      .send({
+        email: "mismatch@example.com",
+        user_id: 778899,
+        password: "123456",
+        password2: "654321",
+      })
+      .expect(400);
 
     // 로그인 요청
-    const loginRes = await request(app).post("/login").send({
+    await request(app).post("/login").send({
       email: "test@example.com",
       password: "123456",
     });
 
-    console.log("Login Response:", loginRes.statusCode, loginRes.body); // 디버깅 로그 추가
-    expect(loginRes.statusCode).toBe(302);
+    // 존재하지 않는 사용자 로그인
+    await request(app)
+      .post("/login")
+      .send({
+        email: "nonexistent@example.com",
+        password: "wrongpassword",
+      })
+      .expect(400);
+    await request(app)
+      .post("/login")
+      .send({
+        email: "test@example.com",
+        password: "wrongpassword",
+      })
+      .expect(400);
 
     // 메시지 작성 요청
-    const messageRes = await request(app)
-      .post("/message/write")
-      .send({
-        stu_id: 123,
-        pro_id: 456,
-        title: "New Message",
-        openDate: Date.now() + 2592000000,
-        message: "Hello World",
-      });
+    await request(app).post("/message/write").send({
+      stu_id: 123,
+      pro_id: 112233,
+      title: "Test Message",
+      message: "This is test message.",
+    });
 
-    console.log("Message Response:", messageRes.statusCode, messageRes.body);
-    expect(messageRes.statusCode).toBe(302);
+    // 홈 화면에서 메시지 확인
+    const homeRes = await request(app).get("/");
+    console.log(homeRes.text); // 출력된 HTML 확인
 
-    // 데이터베이스에서 메시지 확인
-    const savedMessage = await Message.findOne({ title: "New Message" });
-    console.log(savedMessage);
-    expect(savedMessage).toBeDefined();
-    expect(savedMessage.message).toBe("Hello World");
-
-    // 메시지 확인 요청
-    const messagesRes = await request(app).get("/");
-    console.log("Messages Response Text:", messagesRes.text); // 디버깅 로그
-    expect(messagesRes.text).toContain("New Message");
+    // 정규식으로 <li> 태그와 링크 확인
+    expect(homeRes.text).toMatch(
+      /<li.*?>.*?<a href="message\/[a-f0-9]+">Test Message<\/a>.*?<\/li>/
+    );
   });
 });
